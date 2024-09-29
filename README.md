@@ -1,2 +1,3 @@
-# AlgoritmAnalysis
-bmstu_aa
+# Анализ алгоримов
+
+
