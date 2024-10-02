@@ -7,6 +7,13 @@ use std::{fs, path::Path};
 use mes::{STD_ALGS, STD_ALGS_NAMES, STD_MES_TIME, STD_SIZES};
 use mes::{time::get_lev_algs_complete_times, gen, graph::{PLOTS_DIR, plot_graphs, show_plots, plots_to_htmlfile}};
 
+/*
+    MARK: Защита
+    приает => длина 6 => время затраченное на ДЛ = 1108нс
+    6 * 6 * 4 * 6 * 6 * 4 = 20273
+    20273 * 1108нс ~ 22мс
+ */
+
 fn main() {
     let plt_titles = vec![
         "Замеры времени на одинаковых строках",

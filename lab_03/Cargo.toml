@@ -1,0 +1,8 @@
+[package]
+name = "lab_03"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+plotly = "0.9.1"
+lazy_static = "1.4.0"
