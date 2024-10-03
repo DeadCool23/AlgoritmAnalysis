@@ -25,10 +25,10 @@ fn get_iterations_cnt(arr: &[i32], searcher: SearchAlgorithm) -> Vec<usize> {
 }
 
 lazy_static! {
-    static ref VEC_SIZE: usize = arr_size_calc(MY_INDIVIDUAL_NUMBER);
-    static ref STD_ARR: Vec<i32> =  arr::gen_sorted_vec(*VEC_SIZE);
+    pub static ref ARR_SIZE: usize = arr_size_calc(MY_INDIVIDUAL_NUMBER);
+    static ref STD_ARR: Vec<i32> =  arr::gen_sorted_vec(*ARR_SIZE);
 
-    pub static ref SIZES: Vec<usize> = (1..=*VEC_SIZE).collect();
+    pub static ref SIZES: Vec<usize> = (0..*ARR_SIZE).collect();
     pub static ref ITERATIONS: Vec<Vec<usize>> = vec![
         get_iterations_cnt(&STD_ARR, searchers::linear_search),
         get_iterations_cnt(&STD_ARR, searchers::binary_search),

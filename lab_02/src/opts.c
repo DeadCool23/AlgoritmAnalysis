@@ -1,5 +1,6 @@
 #include "opts.h"
 
+#include <time.h>
 #include <getopt.h>
 #include <stdlib.h>
 
@@ -100,11 +101,17 @@ int interactive_mult() {
 
     if (m1->cols != m2->rows) goto err_sizes;
 
+    clock_t start = clock();
     matrix_t *res = mult(m1, m2);
+    clock_t end = clock();
+
+    double time = 1e9 * (end - start) / CLOCKS_PER_SEC;
     if (!res) goto clean_m2;
 
     printf("\n\nМатрица результат:\n");
     matrix_print(res);
+
+    printf("\nЗатраченное время на умножение - %.2lf нс\n", time);
 
     free_matrix(res);
     free_matrix(m2);
@@ -112,8 +119,7 @@ int interactive_mult() {
     return 0;
 
     err_sizes:
-    printf("ERROR: matrix1.rows != matrix2.cols\n");
-    return -1;
+    printf("\nERROR: matrix1.rows != matrix2.cols\n");
 
     clean_m2:
     free_matrix(m2);
