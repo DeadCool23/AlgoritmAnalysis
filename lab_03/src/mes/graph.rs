@@ -7,7 +7,7 @@ lazy_static! {
     pub static ref PLOTS_DIR: String = "plots".to_string();
 }
 
-pub fn plot_histogram(plot_name: &str, x: &[usize], y: &[usize]) -> Plot {
+pub fn plot_histogram(plot_name: &str, x: &[isize], y: &[usize]) -> Plot {
     let mut plot = Plot::new();
 
     let layout = Layout::new()

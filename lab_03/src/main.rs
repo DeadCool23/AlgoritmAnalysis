@@ -1,8 +1,8 @@
 mod mes;
 mod arr;
 
-use mes::{graph::*, ITERATIONS, SIZES, STD_FILENAMES, STD_GRAPH_NAMES};
-use std::{fs, path::Path};
+use std::{fs, path::Path, vec};
+use mes::{graph::*, ITERATIONS, EL_INDEXSES, STD_FILENAMES, STD_GRAPH_NAMES};
 
 fn main() {
     let plots_dir = &PLOTS_DIR.clone();
@@ -12,13 +12,14 @@ fn main() {
     
     let mut plots = vec![];
     for (i, name) in STD_GRAPH_NAMES.iter().enumerate() {
-        plots.push(plot_histogram(&name, &SIZES, &ITERATIONS[i]));
+        plots.push(plot_histogram(&name, &EL_INDEXSES, &ITERATIONS[i]));
     }
 
     let is_show = is_show_plot();
     for (i, plot) in plots.iter().enumerate() {
         if is_show {
             show_plot(plot);
+            // plot.show_image(plotly::ImageFormat::SVG, 1300, 500);
         }
         plot_to_htmlfile(&STD_FILENAMES[i], plot);
     }

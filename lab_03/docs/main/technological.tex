@@ -1,0 +1,69 @@
+\chapter{Технологическая часть}
+
+В данном разделе будут приведены требования к программному обеспечению,
+реализация алгоритмов и средства реализации.
+
+\section{Требования к программному обеспечению}
+
+Входные данные: Массив и искомое значение;
+Выходные данные: Индекс и количество потребованных сравнений.
+
+\section{Средства реализации}
+
+Для реализации был выбран язык программирования $Rust$ \cite{rust}. Выбор обусловлен наличием библиотеки
+$plotly$ \cite{plotly} для построения графиков.
+
+\section{Реализация алгоритмов}
+
+В листингах \ref{lst:linear_search} - \ref{lst:bin_search} представлены реализации алгоритмов.
+
+\begin{center}
+\captionsetup{justification=raggedright,singlelinecheck=off}
+\begin{lstlisting}[label=lst:linear_search,caption=Алгоритм нахождения объектов линейным поиском]
+pub fn linear_search<T: PartialEq>(arr: &[T], target: &T) -> (Option<usize>, usize) {
+    let mut iterations = 0;
+
+    for (index, item) in arr.iter().enumerate() {
+        iterations += 1;
+        if item == target {
+            return (Some(index), iterations);
+        }
+    }
+
+    (None, iterations)
+}
+\end{lstlisting}
+\end{center}
+
+\begin{center}
+\captionsetup{justification=raggedright,singlelinecheck=off}
+\begin{lstlisting}[label=lst:bin_search,caption=Алгоритм нахождения объектов бинарным поиском]
+pub fn binary_search<T: PartialOrd>(arr: &[T], target: &T) -> (Option<usize>, usize) {
+    let mut low = 0;
+    let mut high = arr.len() as isize - 1;
+    let mut iterations = 0;
+
+    while low <= high {
+        iterations += 1;
+        let mid = ((low + high) / 2) as usize;
+
+        if &arr[mid] == target {
+            return (Some(mid), iterations);
+        } else if &arr[mid] < target {
+            low = mid as isize + 1;
+        } else {
+            high = mid as isize - 1;
+        }
+    }
+
+    (None, iterations)
+}
+\end{lstlisting}
+\end{center}
+
+\paragraph*{ВЫВОД} ${}$ \\
+
+В данном разделе были реализованы алгоритмы поиска заданного значения в массиве линейным и двоичным поисками, рассмотрены средства реализации, 
+предусмотрены требования к программному обеспечению.
+
+\clearpage
