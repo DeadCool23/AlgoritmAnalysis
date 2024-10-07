@@ -1,2 +1,6 @@
+# Clang object-files
 *.exe
 out/
+
+*.csv
+*.html
