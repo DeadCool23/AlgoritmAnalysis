@@ -67,11 +67,11 @@ matrix_t *init_matrix_by_size_with_rep_el(const size_type rows, const size_type 
 // IO ===============================================================================
 #include <stdio.h>
 void matrix_print(const matrix_t *mtr) {
-    printf("Размеры матрицы: %zu %zu\n", mtr->rows, mtr->cols);
+    printf("Размеры матрицы: %"SIZE_PR" %"SIZE_PR"\n", mtr->rows, mtr->cols);
     printf("Матрица:\n");
     for (size_type i = 0; i < mtr->rows; ++i) {
         for (size_type j = 0; j < mtr->cols; ++j) {
-            printf("%.2lf ", mtr->data[i][j]);
+            printf("%"VAL_PR" ", mtr->data[i][j]);
         }
         printf("\n");
     }
@@ -80,7 +80,7 @@ void matrix_print(const matrix_t *mtr) {
 static int matrix_size(size_type *n, size_type *m) {
     int row, col = 0;
     printf("Введите размеры матрицы: ");
-    if (scanf("%d%d", &row, &col) != 2) {
+    if (scanf("%"SIZE_SC"%"SIZE_SC"", &row, &col) != 2) {
         return -1;
     }
     if (row <= 0 || col <= 0) {
@@ -94,7 +94,7 @@ static int matrix_els(matrix_t *m) {
     printf("Ввод элементов матрицы\n------------\n");
     for (size_type i = 0; i < m->rows; i++) {
         for (size_type j = 0; j < m->cols; j++) {
-            if (scanf("%lf", &m->data[i][j]) != 1) {
+            if (scanf("%"VAL_SC"", &m->data[i][j]) != 1) {
                 return -1;
             }
         }

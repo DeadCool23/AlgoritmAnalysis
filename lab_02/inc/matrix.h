@@ -3,6 +3,12 @@
 
 #include <stddef.h>
 
+#define VAL_SC "lf"
+#define VAL_PR ".2lf"
+
+#define SIZE_SC "d"
+#define SIZE_PR "zu"
+
 #define MAX_MATRIX_SIZE 300
 
 typedef size_t size_type;
