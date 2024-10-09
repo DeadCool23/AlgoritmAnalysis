@@ -1,6 +1,7 @@
 # Clang object-files
 *.exe
 out/
+ready/
 
-*.csv
-*.html
+./*.gcov
+./*.gcda

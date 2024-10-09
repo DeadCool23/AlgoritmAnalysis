@@ -27,9 +27,9 @@ static matrix_alg_t STD_ALGS[ALGS_CNT] = {
 };
 
 static mes_size_t STD_SIZES = {
-    .start_mes = 10,
-    .end_mes = 100,
-    .step_mes = 10
+    .start_mes = 0,
+    .end_mes = 50,
+    .step_mes = 5
 };
 
 int print_measures(char *titles[ALGS_CNT] , matrix_alg_t algs[ALGS_CNT], mes_size_t *mes_sizes, FILE *f);

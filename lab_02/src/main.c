@@ -1,8 +1,22 @@
 #include <stdio.h>
 
 #include "opts.h"
+#include <stdint.h>
 
-int main(int argc, char **argv) {
+#ifdef TEST
+#include "tests.h"
+#include <stdlib.h>
+#endif // TEST
+
+uint64_t main(int argc, char **argv) {
+#ifdef TEST
+    int total_tests = 0;
+    int num_failed = 0;
+
+    test(&num_failed, &total_tests);
+    int num_succes = total_tests - num_failed;
+    return ((uint64_t)num_failed << 32) | num_succes;
+#else
     options_t op = get_options(argc, argv);
     if (op.opt == HELP) {
         print_help();
@@ -23,4 +37,5 @@ int main(int argc, char **argv) {
         print_unknown();
         return -1;
     }
+#endif // TEST
 }

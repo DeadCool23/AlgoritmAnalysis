@@ -2,7 +2,7 @@ import csv
 import plotly.express as px
 import plotly.graph_objects as go
 
-MES_CSV_FILE = "mes.csv"
+MES_CSV_FILE = "mes/mes.csv"
 
 def read_data_from_file(file_path):
     with open(file_path, mode='r', encoding='utf-8') as file:
@@ -40,8 +40,8 @@ if __name__ == '__main__':
             title="Размер квадратной матрицы"
         ),
         yaxis=dict(
-            title="Время выполнения (нс)"
+            title="Время выполнения (мс)"
         )
     ))
 
-    fig.write_html("mes_plot.html")
+    fig.write_html("mes/mes_plot.html")

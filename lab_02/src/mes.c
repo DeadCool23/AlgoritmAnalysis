@@ -20,7 +20,7 @@ double get_matrix_alg_mes(matrix_alg_t alg, size_type rows, size_type cols) {
         clock_t end = clock();
 
         if (res) free_matrix(res);
-        res_sum += (1e9 * (end - start)) / CLOCKS_PER_SEC;
+        res_sum += (1e3 * (end - start)) / CLOCKS_PER_SEC;
     }
 
     free_matrix(mtr1);
