@@ -1,0 +1,73 @@
+\usepackage{cmap} % Улучшенный поиск русских слов в полученном pdf-файле
+\usepackage[T2A]{fontenc} % Поддержка русских букв
+\usepackage[utf8]{inputenc} % Кодировка utf8
+\usepackage[english,russian]{babel} % Языки: русский, английский
+\usepackage{enumitem} % Нумерованные и Маркированные списки
+\usepackage{threeparttable} % Таблицы
+\usepackage[14pt]{extsizes} % Шрифт 14 по ГОСТ 7.32-2001
+\usepackage{caption} % Подписи к таблицам и рисункам
+    \captionsetup{labelsep=endash} % Разделитель между номером и текстом
+    \captionsetup[figure]{name={Рисунок}} % Подпись "Рисунок"
+\usepackage{amsmath} % Мат. формулы
+
+\usepackage{geometry} % Отступы
+    \geometry{left=20mm}
+    \geometry{right=10mm}
+    \geometry{top=20mm}
+    \geometry{bottom=20mm}
+    \setlength{\parindent}{1.25cm} % Устанавливает отступ первой строки
+
+\usepackage{titlesec} % Используется для форматирования заголовков
+\titleformat{\section}
+	{\normalsize\bfseries}
+	{\thesection}
+	{1em}{}
+\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
+\titlespacing*{\section}{\parindent}{*4}{*4}
+\titlespacing*{\subsection}{\parindent}{*4}{*4}
+
+\usepackage{setspace} % Интервал
+\onehalfspacing % Полуторный интервал
+
+\frenchspacing % Промежутки между словами и предложениями отличаться не должны
+\usepackage{indentfirst} % Красная строка
+
+\usepackage{titlesec}
+\titleformat{\chapter}{\LARGE\bfseries}{\thechapter}{20pt}{\LARGE\bfseries}
+\titleformat{\section}{\Large\bfseries}{\thesection}{20pt}{\Large\bfseries}
+
+\usepackage{multirow} % Объединение строк в таблице
+\usepackage{listings} % Листинги
+\usepackage{xcolor} % Цвета
+
+% Для листинга кода:
+\lstset{%
+    language=C
+	basicstyle=\small\sffamily,			% размер и начертание шрифта для подсветки кода
+	numbers=left,						% где поставить нумерацию строк (слева\справа)
+	%numberstyle=,						% размер шрифта для номеров строк
+	stepnumber=1,						% размер шага между двумя номерами строк
+	numbersep=5pt,						% как далеко отстоят номера строк от подсвечиваемого кода
+	frame=single,						% рисовать рамку вокруг кода
+	tabsize=4,							% размер табуляции по умолчанию равен 4 пробелам
+	captionpos=t,						% позиция заголовка вверху [t] или внизу [b]
+	breaklines=true,					
+	breakatwhitespace=true,				% переносить строки только если есть пробел
+	escapeinside={\#*}{*)},				% если нужно добавить комментарии в коде
+	backgroundcolor=\color{white},
+}
+
+
+\usepackage{pgfplots}
+\usetikzlibrary{datavisualization}
+\usetikzlibrary{datavisualization.formats.functions}
+
+\usepackage{graphicx}
+
+\usepackage[justification=centering]{caption} % Настройка подписей float объектов
+
+\usepackage[unicode,pdftex]{hyperref} % Ссылки в pdf
+\hypersetup{hidelinks}
+
+\usepackage{csvsimple}
+\newcommand{\code}[1]{\texttt{#1}}
