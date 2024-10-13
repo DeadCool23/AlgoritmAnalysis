@@ -45,4 +45,3 @@ if __name__ == '__main__':
     ))
 
     fig.write_html("mes/mes_plot.html")
-    fig.write_image("mes/plot.eps")
