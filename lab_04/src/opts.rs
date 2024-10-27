@@ -1,12 +1,13 @@
 use std::io::{self, Write};
 
-use crate::mes::plot::{is_show_plots, plot_graphs, plot_to_htmlfile, show_plot, STD_PLOTS_DIR, STD_PLOT_TITLE};
-use crate::mes::{RECIPES_CNT_VEC, STD_MES_CNT, THREADS_CNT_VEC};
+use super::mes::{RECIPES_CNT_VEC, THREADS_CNT_VEC, STD_MES_CNT, STD_MES_DIR};
+use super::mes::table::{STD_MES_FILENAME, read_csv_for_tex, write_res_to_file};
+use super::mes::plot::{STD_PLOT_TITLE, is_show_plots, plot_graphs, plot_to_htmlfile, show_plot};
 
 use super::folder::STD_FOLDER_NAME;
-use crate::folder::create_folder_if_not_exists;
+use super::folder::create_folder_if_not_exists;
 
-use crate::recipes::MAIN_URL;
+use super::recipes::MAIN_URL;
 use super::recipes::{get_recipe_urls, paral_reading_recipes, seq_reading_recipes};
 
 use super::mes::time::get_time_mes_results;
@@ -124,10 +125,15 @@ pub fn measure_mode() {
     let res = get_time_mes_results(&recipe_urls.unwrap(), STD_MES_CNT, &THREADS_CNT_VEC, &RECIPES_CNT_VEC);
     
     let plot = plot_graphs(STD_PLOT_TITLE, &THREADS_CNT_VEC, &RECIPES_CNT_VEC, &res);
-
-    create_folder_if_not_exists(STD_PLOTS_DIR, false);
-    plot_to_htmlfile(&format!("{STD_PLOTS_DIR}/plot.html"), &plot);
+    
+    create_folder_if_not_exists(STD_MES_DIR, false);
+    plot_to_htmlfile(&format!("{STD_MES_DIR}/plot.html"), &plot);
+    write_res_to_file(&format!("{STD_MES_DIR}/{STD_MES_FILENAME}"), &res, &THREADS_CNT_VEC);
 
     let is_show = is_show_plots();
     if is_show { show_plot(&plot) };
+}
+
+pub fn print_tex_table() {
+    read_csv_for_tex(&format!("{STD_MES_DIR}/{STD_MES_FILENAME}"), "mes");
 }

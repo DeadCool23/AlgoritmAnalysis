@@ -13,7 +13,7 @@ Cargo.lock
 # MSVC Windows builds of rustc generate these, which store debugging information
 *.pdb
 
-./mes/
+mes_data/
 *app.exe
 .cache
-./recipes/
+recipes_data/

@@ -2,8 +2,7 @@ use std::io::{self, Write};
 
 use plotly::{common::Mode, layout::Axis, Layout, Plot, Scatter};
 
-pub const STD_PLOTS_DIR: &str = "plots";
-pub const STD_PLOT_TITLE: &str = "Сравнение времмени работы";
+pub const STD_PLOT_TITLE: &str = "Сравнение времени работы";
 
 pub fn plot_graphs(plot_name: &str, threads_cnt_vec: &[usize], x: &[usize], ys: &[Vec<usize>]) -> Plot {
     let mut plot = Plot::new();

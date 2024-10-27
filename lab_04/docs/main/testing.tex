@@ -1,0 +1,35 @@
+\chapter{Тестирование}
+
+В таблице ~\ref{tbl:tests} представлены функциональные тесты для разработанного
+программного обеспечения. Все тесты пройдены успешно.
+
+\begin{table}[h!]
+    \begin{center}
+		\begin{threeparttable}
+    \caption{Описание тестовых случаев}
+    \captionsetup{justification=raggedright, singlelinecheck=false}
+    \label{tbl:tests}
+    \begin{tabular}{|c|p{5cm}|p{7cm}|c|}
+        \hline
+        \textbf{№} & \textbf{Входные данные} & \textbf{Ожидаемый результат} & \textbf{Результат теста} \\
+        \hline
+        1 & 5, S & Успешная загрузка 5 страниц, сохранение в $recipes$ & Пройден \\
+        \hline
+        2 & 5, P, 3 & Успешная загрузка 5 страниц 2 потоками, сохранение в $recipes$ & Пройден \\
+        \hline
+        3 & a, s & Неверный ввод числа рецептов & Пройден \\
+        \hline
+        4 & -1, s & Неверный ввод числа рецептов & Пройден \\
+        \hline
+        5 & 2, p, a & Неверный ввод числа потоков & Пройден \\
+        \hline
+        6 & 2, p, -1 & Неверный ввод числа потоков & Пройден \\
+        \hline
+        7 & Отключенное интернет-соединение & Вывод сообщений об ошибках при попытке загрузки страниц & Пройден \\
+        \hline
+    \end{tabular}
+    \end{threeparttable}
+    \end{center}
+\end{table}
+
+\clearpage

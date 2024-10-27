@@ -19,6 +19,8 @@ fn main() {
         opts::interactive_mode();
     } else if args.contains(&String::from("-m")) {
         opts::measure_mode();
+    } else if args.contains(&String::from("-t")) {
+        opts::print_tex_table();
     } else {
         println!("Incorrect option\ncheck -h")
     }
