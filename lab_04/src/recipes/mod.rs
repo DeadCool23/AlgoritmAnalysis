@@ -8,7 +8,6 @@ use std::{fs, thread, sync::{Arc, Mutex}, collections::{HashSet, VecDeque}};
 use super::folder;
 use cache::CACHE_FILENAME;
 
-#[allow(dead_code)]
 pub const MAIN_URL: &'static str = "https://www.gastronom.ru";
 
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
