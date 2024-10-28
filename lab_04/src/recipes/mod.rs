@@ -145,12 +145,13 @@ fn get_recipe(url: &str) -> Option<Recipe> {
 }
 
 // Сохранение рецепта в json
-fn save_recipe_to_json(recipe: &Recipe, folder: &str, print_info: bool) {
+fn save_recipe_to_json(recipe: &Recipe, folder: &str, print_info: bool) -> String {
     let last_path_segment = recipe.url.rsplit('/').next().unwrap();
     let recipe_file = format!("{}/{}.json", folder, last_path_segment);
     let json = serde_json::to_string_pretty(&recipe).unwrap();
     fs::write(&recipe_file, json).unwrap();
     if print_info { println!("Recipe saved to {}", recipe_file); }
+    recipe_file
 }
 
 // Последовательное чтение рецептов
@@ -193,7 +194,9 @@ pub fn paral_reading_recipes(dirname: &str, recipes_cnt: usize, recipe_urls: &[S
 
     folder::create_folder_if_not_exists(dirname, print_info);
 
-    if print_info { println!("Parsing {} recipes with {} threads\n", recipes_cnt, threads_cnt); }
+    if print_info {
+        println!("Parsing {} recipes with {} threads\n", recipes_cnt, threads_cnt);
+    }
 
     let queue = Arc::new(Mutex::new(VecDeque::from(recipe_urls.to_vec())));
     let dirname = Arc::new(dirname.to_string());
@@ -202,11 +205,16 @@ pub fn paral_reading_recipes(dirname: &str, recipes_cnt: usize, recipe_urls: &[S
 
     let mut handles = vec![];
 
+    let logs: Vec<Arc<Mutex<String>>> = (0..threads_cnt)
+        .map(|_| Arc::new(Mutex::new(String::new())))
+        .collect();
+
     for thread_id in 0..threads_cnt {
         let queue = Arc::clone(&queue);
         let dirname = Arc::clone(&dirname);
         let print_info = Arc::clone(&print_info);
         let counter = Arc::clone(&counter);
+        let log = Arc::clone(&logs[thread_id]);
 
         let handle = thread::spawn(move || {
             loop {
@@ -222,29 +230,44 @@ pub fn paral_reading_recipes(dirname: &str, recipes_cnt: usize, recipe_urls: &[S
                             break;
                         }
                         *count += 1;
-                        drop(count);  // Освобождаем мьютекс счетчика
+                        drop(count);
 
                         if *print_info {
-                            println!("Thread {}: Parsing recipe from URL: {}", thread_id + 1, url);
+                            let mut log = log.lock().unwrap();
+                            log.push_str(&format!(
+                                "Thread {}: Parsing recipe from URL: {}\n",
+                                thread_id + 1,
+                                url
+                            ));
                         }
                         let recipe = get_recipe(&url);
-                        if recipe == None { 
-                            println!("Error getting recipe from URL {}", &url);
+                        if recipe.is_none() {
+                            let mut log = log.lock().unwrap();
+                            log.push_str(&format!(
+                                "Thread {}: Error getting recipe from URL {}\n",
+                                thread_id + 1,
+                                &url
+                            ));
                             continue;
                         }
-                        save_recipe_to_json(&recipe.unwrap(), &dirname, *print_info);
+                        let filename = save_recipe_to_json(&recipe.unwrap(), &dirname, false);
+                        let mut log = log.lock().unwrap();
+                        log.push_str(&format!(
+                            "Thread {}: Recipe from URL {} saved to {}\n",
+                            thread_id + 1,
+                            &url,
+                            filename
+                        ));
                     }
                     None => {
-                        if *print_info {
-                            println!("Thread {}: No more URLs to parse", thread_id + 1);
-                        }
+                        let mut log = log.lock().unwrap();
+                        log.push_str(&format!(
+                            "Thread {}: No more URLs to parse\n",
+                            thread_id + 1
+                        ));
                         break;
                     }
                 }
-            }
-
-            if *print_info {
-                println!("Thread {} completed", thread_id + 1);
             }
         });
 
@@ -254,8 +277,12 @@ pub fn paral_reading_recipes(dirname: &str, recipes_cnt: usize, recipe_urls: &[S
     for handle in handles {
         handle.join().unwrap();
     }
-
+    
     if *print_info {
+        for log in logs.iter() {
+            let log = log.lock().unwrap();
+            println!("{}\n", *log);
+        }
         println!("Parsing {} recipes completed", *counter.lock().unwrap());
     }
 }
