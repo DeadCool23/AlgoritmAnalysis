@@ -34,7 +34,7 @@ pub fn read_csv_for_tex(filename: &str, table_name: &str) {
     println!("    \\caption{{Описание тестовых случаев}}");
     println!("    \\captionsetup{{justification=raggedright, singlelinecheck=false}}");
     println!("    \\label{{tbl:{table_name}}}");
-    println!("    \\begin{{tabular}}{{|c|c|}}");
+    println!("    \\begin{{tabular}}{{|r|r|}}");
     println!("        \\hline");
 
     println!("        \\textbf{{{}}} & \\textbf{{{}}} \\\\", header1, header2);
