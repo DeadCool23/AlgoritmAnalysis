@@ -1,0 +1,27 @@
+\chapter{Тестирование}
+
+В таблице~\ref{tbl:tests} представлены функциональные тесты для разработанного
+программного обеспечения. Все тесты пройдены успешно.
+
+\begin{table}[h!]
+    \begin{center}
+		\begin{threeparttable}
+    \caption{Описание тестовых случаев}
+    \captionsetup{justification=raggedright, singlelinecheck=false}
+    \label{tbl:tests}
+    \begin{tabular}{|c|p{5cm}|p{7cm}|c|}
+        \hline
+        \textbf{№} & \textbf{Входные данные} & \textbf{Ожидаемый результат} & \textbf{Результат теста} \\
+        \hline
+        1 & Нажат $Enter$ & Успешная загрузка $n$ страниц, сохранение в $recipes.db$ & Пройден \\
+        \hline
+        2 & Отключенное интернет-соединение & Вывод сообщений об ошибках при попытке загрузки страниц & Пройден \\
+        \hline
+        3 & Отключение интернет-соединения во время работы & Вывод сообщений об ошибках при попытке загрузки страниц & Пройден \\
+        \hline
+    \end{tabular}
+    \end{threeparttable}
+    \end{center}
+\end{table}
+
+\clearpage
