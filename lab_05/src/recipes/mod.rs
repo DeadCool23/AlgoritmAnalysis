@@ -41,7 +41,7 @@ fn fetch_html(url: &str) -> Option<String> {
 
 fn get_recipe_urls_from_html(html: &str) -> Vec<String> {
     let document = Html::parse_document(html);
-    let recipe_selector = Selector::parse("a._link_19xkl_14").unwrap();
+    let recipe_selector = Selector::parse("a._link_iku8o_14").unwrap(); // Это поменялось на самом сайте
 
     document.select(&recipe_selector)
         .filter_map(|el| {

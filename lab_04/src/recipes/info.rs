@@ -18,4 +18,6 @@
  <div itemprop="recipeYield" class="_text_1prcq_11"> Порций: <span class="_bold_1prcq_17">6</span></div> - кол-во порций
  <div itemscope itemtype="https://schema.org/NutritionInformation" class="_text_1prcq_11"> Б/Ж/У: <meta itemprop="proteinContent" content="21.55 г."><meta itemprop="fatContent" content="24.00 г."><meta itemprop="carbohydrateContent" content="22.94 г."><span class="_bold_1prcq_17">21.55 г/24.00 г/22.94</span></div> - бжу
  <div itemprop="recipeIngredient"><span>text<\span> - ингридиент опр рецепта
+
+ ! Классы могут меняться в зависимости от версии сайта https://www.gastronom.ru
  */

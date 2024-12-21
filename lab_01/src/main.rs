@@ -28,7 +28,7 @@ fn main() {
     let mut plts: Vec<Plot> = Vec::new();
 
     for (i, plt_title) in plt_titles.iter().enumerate() {
-        plts.push(plot_graphs(&plt_title,&STD_ALGS_NAMES, &STD_SIZES, &strs_algs_times[i]));
+        plts.push(plot_graphs(&plt_title, &STD_ALGS_NAMES, &STD_SIZES, &strs_algs_times[i]));
     }
     println!("Построены графики");
 
